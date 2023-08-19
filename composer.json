@@ -1,0 +1,25 @@
+{
+  "name": "veasin/nx-controller-model",
+  "description": "mvc-controller for nx",
+  "homepage": "https://github.com/veasin/nx-controller-model",
+  "type": "framework",
+  "authors": [
+    {
+      "name": "Vea",
+      "homepage": "http://www.uper.net",
+      "email": "vea@live.cn"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "veasin/nx":"*",
+    "veasin/nx-model":"*"
+  },
+  "autoload": {
+    "psr-4": {
+      "nx\\helpers\\controller\\": [
+        "src/helpers/"
+      ]
+    }
+  }
+}
