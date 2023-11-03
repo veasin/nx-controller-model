@@ -20,8 +20,8 @@ abstract class model{
 		'sort'=>['str', 'query', 'null'=>'id'],
 		'desc'=>['int', 'query', 'null'=>1],
 	];
-	abstract protected function multiple($conditions):?multiple;
-	abstract protected function single($conditions):?single;
+	abstract protected function multiple($conditions=[]):?multiple;
+	abstract protected function single($conditions=[]):?single;
 	public function list():void{
 		$multiple=$this->multiple(empty($this->multiple) ?[] :$this->filter($this->multiple, ['error'=>404]));
 		if(null === $multiple) $this->throw(404);
