@@ -20,6 +20,7 @@ abstract class model{
 		'sort'=>['str', 'query', 'null'=>'id'],
 		'desc'=>['int', 'query', 'null'=>1],
 	];
+	protected array $output=[];
 	abstract protected function multiple($conditions=[]):?multiple;
 	abstract protected function single($conditions=[]):?single;
 	public function list():void{
@@ -46,7 +47,7 @@ abstract class model{
 	public function get(){
 		$single=$this->single(empty($this->single) ?[] :$this->filter($this->single, ['error'=>404]));
 		if(null === $single) $this->throw(404);
-		$output=$single->output();
+		$output=$single->output($this->output);
 		$next=func_get_arg(0);
 		$result=$next($output, $single);
 		if(null !== $result) $output=$result;
