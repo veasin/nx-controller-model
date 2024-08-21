@@ -28,9 +28,7 @@ abstract class model{
 		if(null === $multiple) $this->throw(404);
 		$output=$multiple->list($this->filter($this->list), $this->filter($this->options));
 		$next=func_get_arg(0);
-		$result=$next($output, $multiple);
-		if(null !== $result) $output=$result;
-		$this->out($output);
+		$this->out($next($output, $multiple) ?? $output);
 	}
 	public function add():void{
 		$multiple=$this->multiple(empty($this->multiple) ?[] :$this->filter($this->multiple, ['error'=>404]));
@@ -39,9 +37,7 @@ abstract class model{
 		else{
 			$data = $this->filter($this->create, ['error' => 400]);
 			$next = func_get_arg(0);
-			$result = $next($data, $multiple);
-			if(null !== $result) $data = $result;
-			$this->throw($multiple->create($data)->save() ? 201 : 500);
+			$this->throw($multiple->create($next($data, $multiple) ?? $data)->save() ? 201 : 500);
 		}
 	}
 	public function get(){
@@ -49,18 +45,14 @@ abstract class model{
 		if(null === $single) $this->throw(404);
 		$output=$single->output($this->output);
 		$next=func_get_arg(0);
-		$result=$next($output, $single);
-		if(null !== $result) $output=$result;
-		return $this->out($output);
+		return $this->out($next($output, $single) ?? $output);
 	}
 	public function update():void{
 		$single=$this->single(empty($this->single) ?[] :$this->filter($this->single, ['error'=>404]));
 		if(null === $single) $this->throw(404);
 		$data=$this->filter($this->update, ['error'=>400]);
 		$next=func_get_arg(0);
-		$result=$next($data, $single);
-		if(null !== $result) $data=$result;
-		$this->throw($single->update($data)->save() ?204 :500);
+		$this->throw($single->update($next($data, $single) ?? $data)->save() ?204 :500);
 	}
 	public function delete():void{
 		$single=$this->single(empty($this->single) ?[] :$this->filter($this->single, ['error'=>404]));
