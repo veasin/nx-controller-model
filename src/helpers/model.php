@@ -15,8 +15,8 @@ abstract class model{
 	protected array $multiple=[];
 	protected array $list=[];
 	protected array $options=[
-		'page'=>['int', 'query', 'digit'=>['>'=>0], 'null'=>1],
-		'max'=>['int', 'query', 'digit'=>['>'=>0], 'null'=>10],
+		'page'=>['int', 'query', 'null'=>1, 'digit'=>['>'=>0]],
+		'max'=>['int', 'query', 'null'=>10, 'digit'=>['>'=>0]],
 		'sort'=>['str', 'query', 'null'=>'id'],
 		'desc'=>['int', 'query', 'null'=>1],
 	];
