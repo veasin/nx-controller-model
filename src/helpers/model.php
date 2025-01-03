@@ -26,7 +26,7 @@ abstract class model{
 	public function list():void{
 		$multiple=$this->multiple(empty($this->multiple) ?[] :$this->filter($this->multiple, ['error'=>404]));
 		if(null === $multiple) $this->throw(404);
-		$output=$multiple->list($this->filter($this->list), $this->filter($this->options));
+		$output=$multiple->list($this->filter($this->list), ["output"=>$this->output,...$this->filter($this->options)]);
 		$next=func_get_arg(0);
 		$this->out($next($output, $multiple) ?? $output);
 	}
